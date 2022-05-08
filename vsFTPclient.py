@@ -15,13 +15,13 @@ while True :
     elif len(req_field) == 2:
         cmd = req_field[0]
         filename = req_field[1]
-    else :
+    else:
         continue
 
     if len(req_field) == 1:
         if cmd.upper() == 'quit':
             break
-        else :
+        else:
             print("Unknown Command... ")
             continue
 
