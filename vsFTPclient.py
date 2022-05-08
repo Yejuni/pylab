@@ -2,24 +2,24 @@
 import socket
 import sys
 
-host = '127.0.0.1'
-port = 10001
+host = '192.168.0.4'
+port = 10109
 
 while True :
-    request = input("vsftp> ")
+    request = input("vsftp>")
     req_field = request.split()
 
     # process user command
-    if len(req_field) == 1 :
+    if len(req_field) == 1:
         cmd = req_field[0]
-    elif len(req_field) == 2 :
+    elif len(req_field) == 2:
         cmd = req_field[0]
         filename = req_field[1]
     else :
         continue
 
-    if len(req_field) == 1 :
-        if cmd.upper() == 'QUIT':
+    if len(req_field) == 1:
+        if cmd.upper() == 'quit':
             break
         else :
             print("Unknown Command... ")
@@ -33,7 +33,7 @@ while True :
         print("connection failed...")
         sys.exit(0)
 
-    if cmd.upper() == 'GET' :
+    if cmd.upper() == 'get':
         # make a request line and send it
         message = cmd + ' ' + filename + '\n'
         sock.sendall(message.encode())
@@ -44,7 +44,7 @@ while True :
         resp_line = sd.readline()
         code, phrase = resp_line.split()
 
-        if code == '100' :
+        if code == '100':
             # read the split line between response line and message body
             sd.readline()
             # server sent the requested file, create a file and save it
@@ -58,17 +58,17 @@ while True :
             fd.close()
             sd.close()
 
-        elif code == '400' :
+        elif code == '400':
             print("vsftp> File Not Found")
         else :
             pass
 
-    elif cmd.upper() == 'PUT':
+    elif cmd.upper() == 'put':
 
         sdr = sock.makefile("r")
         sdw = sock.makefile("w")
 
-        req_line = "PUT" + filename + "\n\n"
+        req_line = "put" + filename + "\n\n"
 
         fd = open(filename, "r")
 
