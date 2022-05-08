@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import socket
 import sys
-
 host = '192.168.0.4'
 port = 10109
 
